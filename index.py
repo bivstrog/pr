@@ -102,7 +102,7 @@ def book_admin():
     books = BooksModel(db.get_connection()).get_all()
     return render_template('book_admin.html',
                            username=session['username'],
-                           title='Просмотр автомобилей',
+                           title='Просмотр книг',
                            books=books)
 
 
@@ -130,7 +130,7 @@ def add_book():
                     dealer=form.dealer_id.data)
         # редирект на главную страницу
         return redirect(url_for('book_admin'))
-    return render_template("add_book.html", title='Добавление автомобиля', form=form)
+    return render_template("add_book.html", title='Добавление книги', form=form)
 
 
 @app.route('/book/<int:book_id>', methods=['GET'])
@@ -151,7 +151,7 @@ def book(book_id):
     dealer = DealersModel(db.get_connection()).get(book[5])
     return render_template('book_info.html',
                            username=session['username'],
-                           title='Просмотр автомобиля',
+                           title='Просмотр книг',
                            book=book,
                            dealer=dealer[1])
 
@@ -223,7 +223,7 @@ def dealer_admin():
     dealers = DealersModel(db.get_connection()).get_all()
     return render_template('dealer_admin.html',
                            username=session['username'],
-                           title='Просмотр Дилерских центров',
+                           title='Просмотр магазигнов',
                            dealers=dealers)
 
 
@@ -244,7 +244,7 @@ def dealer(dealer_id):
     dealer = DealersModel(db.get_connection()).get(dealer_id)
     return render_template('dealer_info.html',
                            username=session['username'],
-                           title='Просмотр информации о дилерском центре',
+                           title='Просмотр информации о магазине',
                            dealer=dealer)
 
 
@@ -265,7 +265,7 @@ def add_dealer():
             dealers.insert(name=form.name.data, address=form.address.data)
             # редирект на главную страницу
             return redirect(url_for('index'))
-        return render_template("add_dealer.html", title='Добавление дилерского центра', form=form)
+        return render_template("add_dealer.html", title='Добавление магазина', form=form)
 
 
 @app.route('/del_dealer/<int:dealer_id>', methods=['GET', 'POST'])
